@@ -1,0 +1,29 @@
+
+Creating new agent
+
+curl -d "agent_id=1&password=test" -X POST 127.0.0.1:8000/app/agent/
+
+LOGIN
+
+(Success)
+curl -d "agent_id=1&password=test" -X POST 127.0.0.1:8000/app/agent/auth/
+
+(Failure)
+curl -d "agent_id=2&password=test" -X POST 127.0.0.1:8000/app/agent/auth/
+
+Create Todo
+
+(Success)
+curl -d "title=1st&description=1st todo&category=important&due_date=2020-07-28" -X POST 127.0.0.1:8000/app/sites/?agent=1
+curl -d "title=1st&description=1st todo&category=important&due_date=2020-07-29" -X POST 127.0.0.1:8000/app/sites/?agent=1
+
+(Failure)
+curl -d "title=1st&description=1st todo&category=important&due_date=2020-07-28" -X POST 127.0.0.1:8000/app/sites/?agent=2
+
+List todos
+
+(Success)
+curl 127.0.0.1:8000/app/sites/list/?agent=1
+
+(Failure)
+curl 127.0.0.1:8000/app/sites/list/?agent=2
